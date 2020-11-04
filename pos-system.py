@@ -21,6 +21,10 @@ class Order:
         for item in self.item_order_list:
             print("商品コード:{}".format(item))
     
+    def view_order_list(self):
+        for master in self.item_master:
+            print("商品名:{}".format(master.item_name)+" 価格:{}".format(master.price))
+    
     
 ### メイン処理
 def main():
@@ -38,6 +42,8 @@ def main():
     
     # オーダー表示
     order.view_item_list()
+    # 商品名と価格の表示
+    order.view_order_list()
     
 if __name__ == "__main__":
     main()
