@@ -23,7 +23,7 @@ class Order:
     
     def view_order_list(self):
         for master in self.item_master:
-            print("商品名:{}".format(master.item_name)+" 価格:{}".format(master.price))
+            print("商品名:{} 価格:{}".format(master.item_name,master.price))
     
     
 ### メイン処理
