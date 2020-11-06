@@ -9,15 +9,6 @@ class Item:
     
     def get_price(self):
         return self.price
-    
-    # CSVからマスター読み込み
-    def read_master_item(self, csv):
-        with open(csv) as f:
-            item_master=[]
-            reader=csv.reader(f)
-            for row in reader:
-                item_master.append(Item("{}".format(row[0]),"{}".format(row[1]),"{}".format(row[2])))
-            return item_master
 
 ### オーダークラス
 class Order:
@@ -36,10 +27,19 @@ class Order:
         for master in self.item_master:
             print("商品名:{} 価格:{}".format(master.item_name,master.price))
     
+    # CSVからマスター読み込み
+    def read_master_item(self, csv):
+        with open(csv) as f:
+            item_master=[]
+            reader=csv.reader(f)
+            for row in reader:
+                item_master.append(Item("{}".format(row[0]),"{}".format(row[1]),"{}".format(row[2])))
+            return item_master
+    
     
 ### メイン処理
 def main():
-    item_master=Item.read_master_item('master.csv')
+    item_master=Order.read_master_item('master.csv')
     # # マスタ登録
     # item_master=[]
     # item_master.append(Item("001","りんご",100))
