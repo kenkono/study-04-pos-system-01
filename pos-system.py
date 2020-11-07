@@ -48,7 +48,7 @@ class Master:
 ### メイン処理
 def main():
     master=Master()
-    item_master=master.master_item('master.csv')
+    item_master=master.read_master_item('master.csv')
     # # マスタ登録
     # item_master=[]
     # item_master.append(Item("001","りんご",100))
