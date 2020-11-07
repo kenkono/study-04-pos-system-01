@@ -36,7 +36,7 @@ class Order:
     #             item_master.append(Item("{}".format(row[0]),"{}".format(row[1]),"{}".format(row[2])))
     #         return item_master
 
-class ReadMaster:
+class Master:
     def read_master_item(self, csv_file):
         with open(csv_file) as f:
             item_master=[]
@@ -47,7 +47,7 @@ class ReadMaster:
 
 ### メイン処理
 def main():
-    read_master=ReadMaster()
+    read_master=Master()
     item_master=read_master.read_master_item('master.csv')
     # # マスタ登録
     # item_master=[]
