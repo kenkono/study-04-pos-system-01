@@ -1,4 +1,5 @@
 import csv
+import datetime as dt
 
 ### 商品クラス
 class Item:
@@ -14,6 +15,7 @@ class Item:
 class Order:
     def __init__(self,item_master):
         self.item_order_list=[]
+        self.item_list=[]
         self.item_number_list=[]
         self.item_master=item_master
     
@@ -34,9 +36,18 @@ class Order:
             print("注文商品個数:{}".format(item))
     
     # マスター情報の表示
-    def view_order_list(self):
+    def view_master_list(self):
         for master in self.item_master:
             print("マスター情報 ID:{} 商品名:{} 価格:{}".format(master.item_code,master.item_name,master.price))
+
+    # オーダー商品の表示
+    def view_order_list(self):
+        for order_item in self.item_order_list:
+            for master in self.item_master:
+                if master.item_code == order_item:
+                    self.item_list.append(master)
+                    # print("オーダー情報 ID:{} 商品名:{} 価格:{}".format(master.item_code,master.item_name,master.price))
+        return self.item_list
 
     # オーダー商品の合計金額
     def sum_order_price(self):
@@ -72,6 +83,13 @@ class Master:
         pay_amount=input("お支払い金額を入力してください。")
         return pay_amount
 
+    def output_txt(self, receipt_text):
+        now = dt.datetime.now()
+        time = now.strftime('%Y-%m-%d')
+        receipt_text = receipt_text
+        with open('txt/{}_receipt.txt'.format(time), mode='w') as f:
+            f.write(receipt_text)
+
 ### メイン処理
 def main():
     master=Master()
@@ -98,7 +116,7 @@ def main():
     order.view_item_number()
 
     # マスターの商品名と価格の表示
-    order.view_order_list()
+    order.view_master_list()
 
     # オーダーの合計個数表示
     sum_order_quantity=order.sum_order_quantity()
@@ -110,6 +128,11 @@ def main():
     # お釣りの表示
     change=int(master.pay_amount())-(sum_order_price)
     print("お釣り:{}".format(change))
+
+    receipt_text = "注文商品: " + str(order.view_order_list()[0].item_name)+ "\n" +"単価: " + str(order.view_order_list()[0].price)+ "\n" +"合計金額: " + str(sum_order_price)+ "\n" + "合計個数: " + str(sum_order_quantity)+ "\n" + "お釣り: " + str(change)
+    master.output_txt(receipt_text)
+
+
     
 if __name__ == "__main__":
     main()
