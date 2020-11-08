@@ -83,6 +83,7 @@ class Master:
         pay_amount=input("お支払い金額を入力してください。")
         return pay_amount
 
+    # テキスト出力
     def output_txt(self, receipt_text):
         now = dt.datetime.now()
         time = now.strftime('%Y-%m-%d')
@@ -94,11 +95,6 @@ class Master:
 def main():
     master=Master()
     item_master=master.read_master_item('master.csv')
-    # # マスタ登録
-    # item_master=[]
-    # item_master.append(Item("001","りんご",100))
-    # item_master.append(Item("002","なし",120))
-    # item_master.append(Item("003","みかん",150))
     
     # オーダー商品コード登録
     order=Order(item_master)
@@ -129,6 +125,7 @@ def main():
     change=int(master.pay_amount())-(sum_order_price)
     print("お釣り:{}".format(change))
 
+    # テキスト出力
     receipt_text = "注文商品: " + str(order.view_order_list()[0].item_name)+ "\n" +"単価: " + str(order.view_order_list()[0].price)+ "\n" +"合計金額: " + str(sum_order_price)+ "\n" + "合計個数: " + str(sum_order_quantity)+ "\n" + "お釣り: " + str(change)
     master.output_txt(receipt_text)
 
