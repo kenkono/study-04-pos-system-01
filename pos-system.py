@@ -86,7 +86,7 @@ class Master:
     # テキスト出力
     def output_txt(self, receipt_text):
         now = dt.datetime.now()
-        time = now.strftime('%Y-%m-%d')
+        time = now.strftime('%Y-%m-%d_%H:%M:%S')
         receipt_text = receipt_text
         with open('txt/{}_receipt.txt'.format(time), mode='w') as f:
             f.write(receipt_text)
