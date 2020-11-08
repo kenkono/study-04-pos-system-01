@@ -37,7 +37,22 @@ class Order:
         for master in self.item_master:
             print("商品名:{} 価格:{}".format(master.item_name,master.price))
 
+    # オーダー商品の合計金額
+    def sum_order_price(self):
+        sum_price = 0
+        for master in self.item_master:
+            sum_price+=int(master.price)
+        print(sum_price)
+
+    # オーダー商品の合計個数
+    def sum_order_quantity(self):
+        sum_quantity = len(self.item_master)
+        print(sum_quantity)
+
 class Master:
+    def __init__(self):
+        pass
+
     def read_master_item(self, csv_file):
         with open(csv_file) as f:
             item_master=[]
@@ -60,6 +75,7 @@ def main():
     order=Order(item_master)
     order_number=input("商品コードを入力してください。")
     order.add_item_order(order_number)
+    
     # 個数入力
     item_number=input("商品個数を入力してください。")
     order.add_item_number(item_number)
@@ -70,6 +86,11 @@ def main():
     order.view_item_number()
     # 商品名と価格の表示
     order.view_order_list()
+    
+    # オーダーの合計金額表示
+    order.sum_order_price()
+    # オーダーの合計個数表示
+    order.sum_order_quantity()
     
 if __name__ == "__main__":
     main()
