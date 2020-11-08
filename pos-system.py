@@ -41,9 +41,14 @@ class Order:
     # オーダー商品の合計金額
     def sum_order_price(self):
         sum_price = 0
-        for master in self.item_master:
-            if master.item_code == self.item_order_list[0]:
-                sum_price+=int(master.price)
+        # for master in self.item_master:
+        #     if master.item_code == self.item_order_list[0]:
+        #         sum_price+=int(master.price)
+        # return sum_price
+        for order_item in self.item_order_list:
+            for master in self.item_master:
+                if master.item_code == order_item:
+                    sum_price+=int(master.price)
         return sum_price
 
     # オーダー商品の合計個数
